@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendmagegn Tajura | Full Stack & Mobile Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="image/logo.png" type="image/png">
+
+    <!-- Favicon for mobile -->
+    <link rel="apple-touch-icon" href="image/logo.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .section-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-hover {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02) rotateX(5deg);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-icon {
+            transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+        
+        .skill-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        /* Animated background elements */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -100px;
+            background: rgba(139, 92, 246, 0.1);
+            animation-delay: 3s;
+        }
+        
+        .circle-3 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 30%;
+            background: rgba(16, 185, 129, 0.1);
+            animation-delay: 6s;
+        }
+        
+        /* Text animations */
+        .text-pop {
+            display: inline-block;
+            animation: textPop 1s ease both;
+        }
+        
+        .letter-animate {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: letterSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        /* Image hover effect */
+        .profile-img {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .profile-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.4));
+            border-radius: 50%;
+            transform: translateZ(-1px);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .profile-img:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        }
+        
+        .profile-img:hover::before {
+            opacity: 1;
+        }
+        
+        /* Project card shine effect */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0.1) 45%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 60%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .project-card:hover::after {
+            left: 100%;
+        }
+        
+        /* Keyframes */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+        
+        @keyframes textPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            80% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes letterSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #3b82f6;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3b82f6 }
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+    <!-- Animated background elements -->
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg z-50 border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center justify-start p-4">
+                    <a href="#home" class="flex items-center font-bold gradient-text hover:scale-105 transition-transform duration-300">
+                        <img src="image/LOGO_Wende.png" alt="Wendmagegn Logo Image" class="h-12 md:h-16 lg:h-20 object-contain" srcset="">
+                        <span class="ml-3 text-2xl md:text-3xl lg:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                                Portfolio
+                        </span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link active-nav text-white hover:scale-105">Home</a>
+                    <a href="#about" class="nav-link text-gray-300 hover:text-white transition hover:scale-105">About</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-white transition hover:scale-105">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-white transition hover:scale-105">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white transition hover:scale-105">Contact</a>
+                    <a href="#blog" class="nav-link text-gray-300 hover:text-white transition hover:scale-105">Blog</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-white hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg pb-4 px-4 border-t border-gray-800">
+            <a href="#home" class="block py-2 text-white hover:text-blue-400 transition transform hover:translate-x-2">Home</a>
+            <a href="#about" class="block py-2 text-gray-300 hover:text-blue-400 transition transform hover:translate-x-2">About</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-blue-400 transition transform hover:translate-x-2">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-300 hover:text-blue-400 transition transform hover:translate-x-2">Projects</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-blue-400 transition transform hover:translate-x-2">Contact</a>
+            <a href="#blog" class="block py-2 text-gray-300 hover:text-blue-400 transition transform hover:translate-x-2">Blog</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-16 md:pt-40 md:pb-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12 reveal">
+                <div class="md:flex items-center justify-between">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                            <span id="hero-text">Hey, I'm </span>
+                            <span class="gradient-text text-pop" style="animation-delay: 0.5s">WENDMAGEGN TAJURA</span>
+                        </h1>
+                        <h2 id="dynamic-skill" class="text-2xl md:text-3xl font-semibold mb-6 gradient-text min-h-[2.5rem]">
+                            <!-- Dynamic skill will appear here -->
+                        </h2>
+                        <!-- <h2 class="text-2xl md:text-3xl font-semibold mb-6 typewriter">Full Stack & Mobile App Developer</h2> -->
+                        <p class="text-lg mb-8 text-gray-300 reveal" style="transition-delay: 0.2s">Crafting elegant Frontends, robust Backends, and intelligent Mobile solutions with a full stack mindset and AI Powered solutions.</p>
+                        <p class="mb-8 text-gray-300 reveal" style="transition-delay: 0.3s">A passionate software engineering student at AASTU. 
+                            <span class="gradient-text text-pop font-bold mb-4 text-2xl">
+                                2025 AASTU Tech Fest Hackathon Winner,
+                            </span> 
+                            team leader, code enthusiast and always hungry to build smarter tech.</p>
+                        
+                        <div class="flex space-x-4 reveal" style="transition-delay: 0.4s">
+                            <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition transform hover:-translate-y-1 hover:shadow-lg">
+                                View My Work
+                            </a>
+                            <a href="#contact" class="border border-blue-500 hover:bg-blue-500 hover:text-white text-blue-400 px-6 py-3 rounded-lg font-medium transition transform hover:-translate-y-1 hover:shadow-lg">
+                                Let's Work Together
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center relative">
+                        <div class="relative w-64 h-64 md:w-80 md:h-80 profile-img z-10">
+                            <!-- Profile Image -->
+                            <div class="w-full h-full rounded-full overflow-hidden shadow-xl bg-gray-800 flex items-center justify-center">
+                                <img src="image/wendep.jpg" alt="Profile Image" class="object-cover w-full h-full">
+                            </div>
+                            <!-- Overlay Icon on Profile Image -->
+                            <div class="absolute -bottom-2 -right-2 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-bolt text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <!-- Half-Circle Gradient Background -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[22rem] h-[11rem] md:w-[28rem] md:h-[14rem] bg-gradient-to-r from-blue-300 via-blue-400 to-cyan-300 rounded-t-full z-0 blur-xl opacity-70"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-center mb-12 gradient-text reveal">
+                    <span id="about-title">About Me</span>
+                </h2>
+                <div class="md:flex items-center">
+                    <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center reveal" style="transition-delay: 0.2s">
+                        <div class="relative w-64 h-64 profile-img">
+                            <div class="w-full h-full rounded-lg overflow-hidden shadow-lg bg-gray-800 flex items-center justify-center">
+                                <img src="image/wendep.jpg" alt="Profile Image" class="object-cover w-full h-full">
+                            </div>
+                            <div class="absolute -bottom-2 -left-2 w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-medal text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 md:pl-12">
+                        <p class="text-lg mb-6 reveal text-gray-300" style="transition-delay: 0.3s">
+                            I'm a software engineering student at AASTU with a strong passion for tech innovation, collaborative problem-solving, and team-driven development.
+                        </p>
+                        
+                        <div class="mb-6 reveal" style="transition-delay: 0.4s">
+                            <h3 class="text-xl font-semibold mb-3">🚀 Achievements</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="text-yellow-400 mr-2">🥈</span>
+                                    <span>
+                                        <strong>2nd place in Flutter Mobile app 
+                                            <span class="gradient-text text-pop font-bold mb-4">
+                                                2024 AASTU TechFest Hackathon
+                                            </span>
+                                        </strong>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-red-400 mr-2">🔥</span>
+                                    <span><strong>Quarterfinalist 
+                                            <span class="gradient-text text-pop font-bold mb-4">
+                                                2024 A2SV African AI Hackathon
+                                            </span>
+                                        </strong> (as a Team erLead)
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-yellow-400 mr-2">🥈</span>
+                                    <span><strong>2nd place Winner 
+                                            <span class="gradient-text text-pop font-bold mb-4">
+                                                2025 AASTU TechFest Hackathon
+                                            </span>
+                                        </strong>(as a Team Leader)
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <p class="mb-6 reveal text-gray-300" style="transition-delay: 0.5s">
+                            Whether leading a team through tight deadlines or architecting scalable code, I bring energy, creativity, and resilience to every challenge.
+                            <br>
+                            My strong suits include team collaboration, project leadership, and delivering quality solutions under pressure. 
+                            <br>
+                            I thrive in challenging environments where I can apply my technical skills to solve real-world problems.
+                        </p>
+                        
+                        <div class="reveal" style="transition-delay: 0.6s">
+                            <a href="https://drive.google.com/file/d/16e5oVpBg_5R6la5fmHu846sm-Z9hgYIq/view?usp=drive_link" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition transform hover:scale-105 hover:shadow-lg">
+                                <i class="fas fa-download mr-2"></i> Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-center mb-12 gradient-text reveal">
+                    <span id="skills-title">My Skills</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Web Development -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.2s">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-900 bg-opacity-30 flex items-center justify-center mr-4 skill-icon">
+                                <i class="fas fa-laptop-code text-blue-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">Web Development</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-html5 text-orange-400 text-xl mr-3"></i>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-css3-alt text-blue-400 text-xl mr-3"></i>
+                                <span>CSS3/Tailwind</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-js-square text-yellow-400 text-xl mr-3"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-python text-blue-400 text-xl mr-3"></i>
+                                <span>Django</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-php text-purple-400 text-xl mr-3"></i>
+                                <span>PHP</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-java text-red-400 text-xl mr-3"></i>
+                                <span>Java</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Development -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.4s">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-purple-900 bg-opacity-30 flex items-center justify-center mr-4 skill-icon">
+                                <i class="fas fa-mobile-alt text-purple-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">Mobile Development</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center skill-icon">
+                                <i class="fas fa-mobile text-blue-300 text-xl mr-3"></i>
+                                <span>Flutter</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-react text-blue-300 text-xl mr-3"></i>
+                                <span>React Native</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-android text-green-400 text-xl mr-3"></i>
+                                <span>Java (Android)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI/ML & Others -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.6s">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-green-900 bg-opacity-30 flex items-center justify-center mr-4 skill-icon">
+                                <i class="fas fa-robot text-green-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">AI/ML & Others</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-python text-blue-400 text-xl mr-3"></i>
+                                <span>Python/Flask</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fas fa-brain text-purple-400 text-xl mr-3"></i>
+                                <span>Machine Learning</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fab fa-git-alt text-orange-400 text-xl mr-3"></i>
+                                <span>Git/GitHub</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fas fa-code text-gray-300 text-xl mr-3"></i>
+                                <span>C++</span>
+                            </div>
+                            <!-- New Soft Skills -->
+                            <div class="flex items-center skill-icon">
+                                <i class="fas fa-tasks text-yellow-300 text-xl mr-3"></i>
+                                <span>Project Management & Problem Solving</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fas fa-comments text-blue-300 text-xl mr-3"></i>
+                                <span>Communication Skills</span>
+                            </div>
+                            <div class="flex items-center skill-icon">
+                                <i class="fas fa-users text-pink-400 text-xl mr-3"></i>
+                                <span>Leadership Skills</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-center mb-12 gradient-text reveal">
+                    <span id="projects-title">Featured Projects</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.1s">
+                        <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                            <img src="image/Guadaye app.jpg" alt="Guadaye home rent app" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Guadaye App</h3>
+                            <p class="text-gray-300 mb-4">Home rental platform built with Flutter that connects landlords with tenants.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">Flutter</span>
+                                <span class="bg-purple-900 bg-opacity-30 text-purple-300 text-xs px-3 py-1 rounded-full">Firebase</span>
+                                <span class="bg-green-900 bg-opacity-30 text-green-300 text-xs px-3 py-1 rounded-full">Dart</span>
+                            </div>
+                            <a href="https://github.com/wende12github/Guadaye-RentHub" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center">
+                            <img src="image/ENGBABA.png" alt="ENGBABA AI Sign Language Translator app" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">AI Sign Language Translator</h3>
+                            <p class="text-gray-300 mb-4">React Native app with Flask backend that translates sign language to text and REAL TIME chat using ML.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">React Native</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-full">Flask</span>
+                                <span class="bg-orange-900 bg-opacity-30 text-orange-300 text-xs px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-yellow-900 bg-opacity-30 text-yellow-300 text-xs px-3 py-1 rounded-full">TensorFlow</span>
+                            </div>
+                            <a href="https://github.com/orgs/Black-Hole-2024/repositories" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center">
+                            <img src="image/image.png" alt="TimeBank Skill-for-Time Exchange Platform" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">⏰ TimeBank Skill-for-Time Exchange Platform</h3>
+                            <p class="text-gray-300 mb-4">
+                                TimeBank is a web platform built by Django + DRF and React + Tailwind CSS, 
+                                where students can exchange services and skills using time credits instead of money.
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">React + Tailwind CSS</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-full">Dajngo + DRF</span>
+                                <span class="bg-orange-900 bg-opacity-30 text-orange-300 text-xs px-3 py-1 rounded-full">Django Channels</span>
+                                <span class="bg-purple-900 bg-opacity-30 text-purple-300 text-xs px-3 py-1 rounded-full">Axios + Vite</span>
+                                <span class="bg-yellow-900 bg-opacity-30 text-yellow-300 text-xs px-3 py-1 rounded-full">PostgreeSQL Database</span>
+                            </div>
+                            <a href="https://github.com/wende12github/Silent-Coders" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.3s">
+                        <div class="h-48 bg-gradient-to-r from-red-500 to-pink-600 flex items-center justify-center">
+                            <img src="image/E-Commerce-PNG-Photo.png" alt="Flutter E-Commerce App" class="object-cover w-full h-full">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">E-commerce Capstone Project</h3>
+                            <p class="text-gray-300 mb-4">
+                                Flutter E-commerce Capstone Project! 
+                                This project aims to showcase the capabilities of Flutter in building a robust and feature-rich e-commerce application.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">Flutter</span>
+                                <span class="bg-green-900 bg-opacity-30 text-green-300 text-xs px-3 py-1 rounded-full">Firebase</span>
+                                <span class="bg-yellow-900 bg-opacity-30 text-yellow-300 text-xs px-3 py-1 rounded-full">Dart</span>
+                            </div>
+                            <a href="https://www.linkedin.com/posts/wendmagegn-tajura_capstoneproject-ecommerceclothingapp-aastu-activity-7178761382845169664-Okxm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEqXeSMBMUb_Y7ZKfR-iCaPhxsGh7xMFl8o" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.3s">
+                        <div class="h-48 bg-gradient-to-r from-red-500 to-pink-600 flex items-center justify-center">
+                            <i class="fas fa-users text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Social Media API</h3>
+                            <p class="text-gray-300 mb-4">RESTful backend for a social media platform built with Django.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">Django</span>
+                                <span class="bg-green-900 bg-opacity-30 text-green-300 text-xs px-3 py-1 rounded-full">DRF</span>
+                                <span class="bg-yellow-900 bg-opacity-30 text-yellow-300 text-xs px-3 py-1 rounded-full">PostgreSQL</span>
+                            </div>
+                            <a href="https://github.com/wende12github/GDG-CAPSTONE-Project" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 6 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.4s">
+                        <div class="h-48 bg-gradient-to-r from-yellow-500 to-orange-600 flex items-center justify-center">
+                            <i class="fas fa-chess-board text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Ethiopian Checkers (Dama)</h3>
+                            <p class="text-gray-300 mb-4">Classic Ethiopian board game implemented in Java with GUI.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-red-900 bg-opacity-30 text-red-300 text-xs px-3 py-1 rounded-full">Java</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-full">Swing</span>
+                            </div>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 7 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.5s">
+                        <div class="h-48 bg-gradient-to-r from-indigo-500 to-blue-600 flex items-center justify-center">
+                            <i class="fas fa-book text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Bookstore Website</h3>
+                            <p class="text-gray-300 mb-4">E-commerce site for books with PHP backend and Tailwind CSS frontend.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">PHP</span>
+                                <span class="bg-green-900 bg-opacity-30 text-green-300 text-xs px-3 py-1 rounded-full">Tailwind</span>
+                                <span class="bg-yellow-900 bg-opacity-30 text-yellow-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                                <span class="bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-full">MySQL</span>
+                            </div>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 8 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.6s">
+                        <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                            <i class="fas fa-gamepad text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Space Invader Game</h3>
+                            <p class="text-gray-300 mb-4">Classic arcade game built with pure HTML, CSS, and JavaScript.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-orange-900 bg-opacity-30 text-orange-300 text-xs px-3 py-1 rounded-full">HTML</span>
+                                <span class="bg-blue-900 bg-opacity-30 text-blue-300 text-xs px-3 py-1 rounded-full">CSS</span>
+                                <span class="bg-yellow-900 bg-opacity-30 text-yellow-300 text-xs px-3 py-1 rounded-full">JavaScript</span>
+                            </div>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                View Project <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-center mb-12 gradient-text reveal">
+                    <span id="experience-title">Experience & Highlights</span>
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- Experience 1 -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.2s">
+                        <div class="flex items-start">
+                            <div class="mr-4">
+                                <div class="w-12 h-12 rounded-lg bg-blue-900 bg-opacity-30 flex items-center justify-center skill-icon">
+                                    <i class="fas fa-trophy text-blue-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">Team Lead @ A2SV AI African Hackathon</h3>
+                                <p class="text-gray-300 mb-2">Quarterfinalist - Led a team to develop an AI solution for African challenges</p>
+                                <p class="text-sm text-gray-400">2024</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 2 -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.4s">
+                        <div class="flex items-start">
+                            <div class="mr-4">
+                                <div class="w-12 h-12 rounded-lg bg-purple-900 bg-opacity-30 flex items-center justify-center skill-icon">
+                                    <i class="fas fa-medal text-purple-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">Mobile Developer @ AASTU TechFest</h3>
+                                <p class="text-gray-300 mb-2">2nd place in Flutter category - Developed a mobile app with my team</p>
+                                <p class="text-sm text-gray-400"> April 2024</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 3 -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.7s">
+                        <div class="flex items-start">
+                            <div class="mr-4">
+                                <div class="w-12 h-12 rounded-lg bg-yellow-900 bg-opacity-30 flex items-center justify-center skill-icon">
+                                    <i class="fas fa-trophy text-yellow-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">2nd Place Winner @ 2025 AASTU TechFest Hackathon</h3>
+                                <p class="text-gray-300 mb-2">
+                                    Led a talented team of developers to the finals, earning 2nd place for all based Stack. 
+                                    Managed project scope, coordinated tasks, and ensured timely delivery as <strong>Team Leader</strong> & <strong>Project Manager</strong>.
+                                </p>
+                                <p class="text-sm text-gray-400">May 2025</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Experience 4 -->
+                    <div class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md card-hover reveal" style="transition-delay: 0.6s">
+                        <div class="flex items-start">
+                            <div class="mr-4">
+                                <div class="w-12 h-12 rounded-lg bg-green-900 bg-opacity-30 flex items-center justify-center skill-icon">
+                                    <i class="fas fa-code text-green-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold">Software Engineering Student @ AASTU</h3>
+                                <p class="text-gray-300 mb-2">Participated in multiple individual and group projects, hackathons, and tech events</p>
+                                <p class="text-sm text-gray-400">2023 - Present</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial -->
+                <div class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 reveal">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <i class="fas fa-quote-left text-3xl opacity-20 mb-4"></i>
+                        <p class="text-lg mb-6">
+                            Every project is a chance to learn something new from a teammate’s perspective, a user’s pain point, or a line of unexpected code.
+                            <br>
+                            As a <strong>leader</strong>, I’ve learned that great outcomes come from empathy, trust, and clear vision. 
+                            <br>
+                            As a <strong>Django and full-stack developer</strong>, I’ve learned how to turn big ideas into structured, scalable solutions.
+                            <br>
+                            And as a <strong>learner</strong>, I stay curious, always open to new challenges and smarter ways to build.
+                        </p>
+                        <div class="font-medium">
+                            <p class="text-sm italic text-gray-200 mt-1">"Lead with vision, learn with humility, build with purpose."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-center mb-12 gradient-text reveal">
+                    <span id="contact-title">Get In Touch</span>
+                </h2>
+                
+                <div class="md:flex">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                        <h3 class="text-xl font-semibold mb-4 reveal" style="transition-delay: 0.2s">Let's work together!</h3>
+                        <p class="mb-6 text-gray-300 reveal" style="transition-delay: 0.3s">I'm currently looking for internship opportunities, freelance projects, or collaboration on interesting ideas. Feel free to reach out!</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start reveal" style="transition-delay: 0.4s">
+                                <div class="mr-4 mt-1">
+                                    <i class="fas fa-envelope text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Email</h4>
+                                    <p class="text-gray-300">wendmagegn9412@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start reveal" style="transition-delay: 0.5s">
+                                <div class="mr-4 mt-1">
+                                    <i class="fas fa-phone-alt text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Phone</h4>
+                                    <p class="text-gray-300">+251 97 215 5129</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start reveal" style="transition-delay: 0.6s">
+                                <div class="mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Location</h4>
+                                    <p class="text-gray-300">Addis Ababa, Ethiopia</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 reveal" style="transition-delay: 0.7s">
+                            <h4 class="font-medium mb-4">Connect with me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/wendmagegn-tajura/" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-blue-600 transition transform hover:-translate-y-1 hover:shadow-lg">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/wende12github" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-gray-600 transition transform hover:-translate-y-1 hover:shadow-lg">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="@Mark_9412" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-blue-500 transition transform hover:-translate-y-1 hover:shadow-lg">
+                                    <i class="fab fa-telegram"></i>
+                                </a>
+                                <a href="https://www.instagram.com/wende_9412/" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-pink-600 transition transform hover:-translate-y-1 hover:shadow-lg">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <form action="https://formsubmit.co/wendmagegn9412@gmail.com" method="POST" class="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-md reveal">
+                            
+                             <!-- Disable CAPTCHA -->
+                            <input type="hidden" name="_captcha" value="false">
+                            <!-- Redirect to thank-you message -->
+                            <input type="hidden" name="_next" value="thank-you.html">
+                            <input type="hidden" name="_subject" value="New Message from Portfolio">
+                            <input type="hidden" name="_autoresponse" value="Hello,
+                                Thank you for reaching out. I have received your message and will get back to you as soon as possible.
+                                
+                                Best regards,
+                                Wendmagegn Tajura">
+
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all focus:border-blue-500">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all focus:border-blue-500">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all focus:border-blue-500">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="4" name="message" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all focus:border-blue-500"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition transform hover:-translate-y-1 hover:shadow-lg">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section (Optional) -->
+    <section id="blog" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-container p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-center mb-12 gradient-text reveal">
+                    <span id="blog-title">Latest Blog Posts</span>
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Blog Post 1 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gradient-to-r from-blue-500 to-teal-600 flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">How We Built an AI Sign Language Translator</h3>
+                            <p class="text-gray-300 mb-4">A technical breakdown of our hackathon project that translates sign language to text in real-time.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Jun - Augest, 2024</span>
+                                <a href="#" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                    Read More <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog Post 2 -->
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden shadow-lg project-card card-hover reveal" style="transition-delay: 0.4s">
+                        <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                            <i class="fas fa-users text-white text-6xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">From Learner to Leader: My Journey Through Hackathons</h3>
+                            <p class="text-gray-300 mb-4">
+                                Leading my team to 2nd place at the 2025 AASTU TechFest Hackathon was more than just a win, it was a testament to growth, teamwork, and resilience. 
+                                <br>
+                                From my first hackathon to now, I’ve learned to lead, listen, and build alongside brilliant minds.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">May 7, 2025</span>
+                                <a href="#" class="text-blue-400 hover:text-blue-300 font-medium inline-flex items-center group">
+                                    Read More <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 reveal">
+                    <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition transform hover:-translate-y-1 hover:shadow-lg">
+                        View All Posts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-90 border-t border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+           
+            <div class="md:flex md:justify-between md:items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>© 2025 WENDMAGEGN TAJURA - <span class="typewriter">💻 Software Engineer</span></p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-125">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-125">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-125">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-white transition transform hover:scale-125">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-800 text-sm text-gray-400">
+                <div class="flex flex-wrap justify-center space-y-2 text-sm text-gray-400 mb-6 flex-col items-center">
+                    <p class="italic text-gray-300">"💻 Keep building. Keep learning. Keep connecting.💻"</p>
+                    <p class="text-gray-400">Whether it's code, community, or creativity I'm always up for it.</p>
+                    <p class="text-gray-500">Let’s create something meaningful together 💡</p>
+                  </div>                  
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.classList.toggle('text-blue-400');
+        });
+
+        // Display Skill using Type write all
+        const skills = [
+            "Full Stack Developer",
+            "Backend Developer using Django, Python & Java",
+            "Mobile App Developer using Flutter & React Native",
+            "Model Trainer",
+            "Project Manager"
+        ];
+
+        const skillElement = document.getElementById("dynamic-skill");
+        let skillIndex = 0;
+        let charIndex = 0;
+        let isDeleting = FileSystemWritableFileStream;
+        let typingSpeed = 100;
+
+        function typeSkill() {
+            const current = skills[skillIndex]
+            const displayed = current.substring(0, charIndex)
+            // skillElement.classList.remove("opacity-0");
+            skillElement.innerHTML = `<span class="gradient-text">${displayed}</span>`;
+            
+            if (!isDeleting && charIndex < current.length) {
+                charIndex++;
+                typingSpeed = 70;
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                if (!isDeleting) {
+                    typingSpeed = 2000; // Pause at end of word
+                    isDeleting = true;
+                } else {
+                    isDeleting = false;
+                    skillIndex = (skillIndex + 1) % skills.length;
+                    typingSpeed = 100;  // Change every 3 second
+                }
+            }
+
+            setTimeout(typeSkill, typingSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", typeSkill);
+
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.classList.remove('text-blue-400');
+                }
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active-nav');
+                });
+                this.classList.add('active-nav');
+            });
+        });
+        
+        // Set active nav based on scroll position
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active-nav');
+                }
+            });
+        });
+        
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('load', revealOnScroll);
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Initialize with home section active
+        document.querySelector('a[href="#home"]').classList.add('active-nav');
+        
+        // Animate letters in titles
+        const animateTitleLetters = (elementId) => {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const text = element.innerText;
+            element.innerHTML = '';
+            
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.className = 'letter-animate';
+                span.style.animationDelay = `${i * 0.1}s`;
+                span.textContent = text[i];
+                element.appendChild(span);
+            }
+        };
+        
+        // Animate all section titles
+        ['about-title', 'skills-title', 'projects-title', 'experience-title', 'contact-title', 'blog-title'].forEach(id => {
+            animateTitleLetters(id);
+        });
+        
+        // Typewriter effect for hero text
+        const heroText = document.getElementById('hero-text');
+        if (heroText) {
+            heroText.innerHTML = '';
+            const text = "Hey, I'm ";
+            let i = 0;
+            
+            const typeWriter = () => {
+                if (i < text.length) {
+                    heroText.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            typeWriter();
+        }
+    </script>
+</body>
+</html>
