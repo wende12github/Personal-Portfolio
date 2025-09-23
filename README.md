@@ -65,8 +65,4 @@ Hi, I'm **Wendmagegn Tajura** - a passionate software engineer and problem solve
 
 Check out my social profiles and feel free to reach out to me!
 
-
-- - [![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo_2023.png)]([https://www.linkedin.com/in/your-linkedin-profile](https://www.linkedin.com/in/wendmagegn-tajura))
-- [![GitHub](https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg)]([https://github.com/your-github-username](https://github.com/wende12github))
-
   *Feel free to connect with me through LinkedIn or check out my GitHub for more of my work!*
